@@ -1,0 +1,48 @@
+server:
+  port: 8888
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+devtools:
+  restart:
+    enabled: true
+    additional-paths: src/main/java
+    exclude: static/**,tempates/**
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/exam?characterEncoding=UTF-8&serverTimezone=UTC
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: 123456
+      initial-size: 10
+      min-idle: 10
+      max-active: 100
+      min-evictable-idle-time-millis: 1800000
+      max-wait: 50000
+      validation-query: select 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      time-between-connect-error-millis: 60000
+      filter:
+        stat:
+          enabled: true
+          db-type: mysql
+          log-slow-sql: true
+          slow-sql-millis: 2000
+pagehelper:
+  helper-dialect: mysql
+  default-count: true
+  reasonable: true
+  params: count=countSql
+  support-methods-arguments: true
+swagger:
+  title: 考试管理系统
+  description: 考试管理系统API接口文档
+  base-package: com.ljy.exam.controller
+  version: 0.8
+  license: No license for use
+  contact:
+    name: 刘建宇
+    email: 770156137@qq.com
+

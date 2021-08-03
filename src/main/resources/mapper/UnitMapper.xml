@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group.special_work_exam.dao.UnitMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.bean.Unit" >
+    <id column="unitid" property="unitid" jdbcType="INTEGER" />
+    <result column="unitName" property="unitname" jdbcType="VARCHAR" />
+    <result column="unitpid" property="unitpid" jdbcType="INTEGER" />
+    <result column="unitstate" property="unitstate" jdbcType="INTEGER" />
+    <result column="provincetypeid" property="provincetypeid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    unitid, unitName, unitpid, unitstate, provincetypeid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from unit
+    where unitid = #{unitid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from unit
+    where unitid = #{unitid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.bean.Unit" >
+    insert into unit (unitid, unitName, unitpid, 
+      unitstate, provincetypeid)
+    values (#{unitid,jdbcType=INTEGER}, #{unitname,jdbcType=VARCHAR}, #{unitpid,jdbcType=INTEGER}, 
+      #{unitstate,jdbcType=INTEGER}, #{provincetypeid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.bean.Unit" >
+    insert into unit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unitid != null" >
+        unitid,
+      </if>
+      <if test="unitname != null" >
+        unitName,
+      </if>
+      <if test="unitpid != null" >
+        unitpid,
+      </if>
+      <if test="unitstate != null" >
+        unitstate,
+      </if>
+      <if test="provincetypeid != null" >
+        provincetypeid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unitid != null" >
+        #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="unitname != null" >
+        #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="unitpid != null" >
+        #{unitpid,jdbcType=INTEGER},
+      </if>
+      <if test="unitstate != null" >
+        #{unitstate,jdbcType=INTEGER},
+      </if>
+      <if test="provincetypeid != null" >
+        #{provincetypeid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.bean.Unit" >
+    update unit
+    <set >
+      <if test="unitname != null" >
+        unitName = #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="unitpid != null" >
+        unitpid = #{unitpid,jdbcType=INTEGER},
+      </if>
+      <if test="unitstate != null" >
+        unitstate = #{unitstate,jdbcType=INTEGER},
+      </if>
+      <if test="provincetypeid != null" >
+        provincetypeid = #{provincetypeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where unitid = #{unitid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.bean.Unit" >
+    update unit
+    set unitName = #{unitname,jdbcType=VARCHAR},
+      unitpid = #{unitpid,jdbcType=INTEGER},
+      unitstate = #{unitstate,jdbcType=INTEGER},
+      provincetypeid = #{provincetypeid,jdbcType=INTEGER}
+    where unitid = #{unitid,jdbcType=INTEGER}
+  </update>
+</mapper>

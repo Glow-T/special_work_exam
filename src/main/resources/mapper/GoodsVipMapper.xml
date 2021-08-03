@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group.special_work_exam.dao.GoodsVipMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.bean.GoodsVip" >
+    <id column="goodsvip_id" property="goodsvipId" jdbcType="INTEGER" />
+    <result column="goodsvip_name" property="goodsvipName" jdbcType="VARCHAR" />
+    <result column="goodsvip_time" property="goodsvipTime" jdbcType="INTEGER" />
+    <result column="goodsvip_price" property="goodsvipPrice" jdbcType="REAL" />
+    <result column="goodsvip_ptype_id" property="goodsvipPtypeId" jdbcType="INTEGER" />
+    <result column="goodsvip_state" property="goodsvipState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goodsvip_id, goodsvip_name, goodsvip_time, goodsvip_price, goodsvip_ptype_id, goodsvip_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods_vip
+    where goodsvip_id = #{goodsvipId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods_vip
+    where goodsvip_id = #{goodsvipId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.bean.GoodsVip" >
+    insert into goods_vip (goodsvip_id, goodsvip_name, goodsvip_time, 
+      goodsvip_price, goodsvip_ptype_id, goodsvip_state
+      )
+    values (#{goodsvipId,jdbcType=INTEGER}, #{goodsvipName,jdbcType=VARCHAR}, #{goodsvipTime,jdbcType=INTEGER}, 
+      #{goodsvipPrice,jdbcType=REAL}, #{goodsvipPtypeId,jdbcType=INTEGER}, #{goodsvipState,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.bean.GoodsVip" >
+    insert into goods_vip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsvipId != null" >
+        goodsvip_id,
+      </if>
+      <if test="goodsvipName != null" >
+        goodsvip_name,
+      </if>
+      <if test="goodsvipTime != null" >
+        goodsvip_time,
+      </if>
+      <if test="goodsvipPrice != null" >
+        goodsvip_price,
+      </if>
+      <if test="goodsvipPtypeId != null" >
+        goodsvip_ptype_id,
+      </if>
+      <if test="goodsvipState != null" >
+        goodsvip_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsvipId != null" >
+        #{goodsvipId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsvipName != null" >
+        #{goodsvipName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsvipTime != null" >
+        #{goodsvipTime,jdbcType=INTEGER},
+      </if>
+      <if test="goodsvipPrice != null" >
+        #{goodsvipPrice,jdbcType=REAL},
+      </if>
+      <if test="goodsvipPtypeId != null" >
+        #{goodsvipPtypeId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsvipState != null" >
+        #{goodsvipState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.bean.GoodsVip" >
+    update goods_vip
+    <set >
+      <if test="goodsvipName != null" >
+        goodsvip_name = #{goodsvipName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsvipTime != null" >
+        goodsvip_time = #{goodsvipTime,jdbcType=INTEGER},
+      </if>
+      <if test="goodsvipPrice != null" >
+        goodsvip_price = #{goodsvipPrice,jdbcType=REAL},
+      </if>
+      <if test="goodsvipPtypeId != null" >
+        goodsvip_ptype_id = #{goodsvipPtypeId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsvipState != null" >
+        goodsvip_state = #{goodsvipState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where goodsvip_id = #{goodsvipId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.bean.GoodsVip" >
+    update goods_vip
+    set goodsvip_name = #{goodsvipName,jdbcType=VARCHAR},
+      goodsvip_time = #{goodsvipTime,jdbcType=INTEGER},
+      goodsvip_price = #{goodsvipPrice,jdbcType=REAL},
+      goodsvip_ptype_id = #{goodsvipPtypeId,jdbcType=INTEGER},
+      goodsvip_state = #{goodsvipState,jdbcType=INTEGER}
+    where goodsvip_id = #{goodsvipId,jdbcType=INTEGER}
+  </update>
+</mapper>

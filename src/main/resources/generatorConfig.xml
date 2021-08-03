@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <properties resource="db.properties"/>
+
+    <!-- mysql-jdbc驱动地址 -->
+    <!--<classPathEntry location="D:/work/jar/mysql-connector-java-5.1.29.jar"/>-->
+    <!--<classPathEntry location="${jdbc.driver}"/>-->
+    <context id="context1">
+
+        <!-- 生成的pojo，将implements Serializable-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 连接数据库 -->
+        <jdbcConnection
+                driverClass="${jdbc.driver}"
+                connectionURL="${jdbc.url}"
+                userId="${jdbc.username}"
+                password="${jdbc.userpassword}"
+        />
+
+        <!--  默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
+           true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal
+       -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+
+        <!--	<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+            connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" userId="zsfx" password="zsfx" /> -->
+        <!-- !!!! Model Configurations !!!! -->
+        <!-- 模型配置 -->
+        <javaModelGenerator targetPackage="com.group.special_work_exam.bean" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- !!!! Mapper XML Configurations !!!! -->
+        <!--  生成表xml配置  -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- !!!! Mapper Interface Configurations !!!! -->
+        <!-- dao配置 -->
+        <javaClientGenerator targetPackage="com.group.special_work_exam.dao" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+
+
+
+<!--        <table schema="" tableName="cash_out" domainObjectName="CashOut"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="certificate" domainObjectName="Certificate"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="examquestion" domainObjectName="ExamQuestion"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="goods_vip" domainObjectName="GoodsVip"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="goods_vip_sale_record" domainObjectName="GoodsVipSaleRecord"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="invest_money_record" domainObjectName="InvestMoneyRecord"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="lunbo" domainObjectName="LunBo"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="manager" domainObjectName="Manager"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="power_log" domainObjectName="PowerLog"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="power_menu" domainObjectName="PowerMenu"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="power_role" domainObjectName="PowerRole"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="power_role_menu" domainObjectName="PowerRoleMenu"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="power_user_role" domainObjectName="PowerUserRole"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="practice_record" domainObjectName="PracticeRecord"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="province_type" domainObjectName="ProvinceType"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="questionoption" domainObjectName="QuestionOption"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="questiontype" domainObjectName="QuestionType"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="share_income" domainObjectName="ShareIncome"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="share_record" domainObjectName="ShareRecord"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="simulate_record" domainObjectName="SimulateRecord"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="simulate_record_details" domainObjectName="SimulateRecordDetails"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="simulate_strategy" domainObjectName="SimulateStrategy"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="sys_setting" domainObjectName="SysSetting"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="unit" domainObjectName="Unit"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="user" domainObjectName="User"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="user_vip" domainObjectName="user_vip"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+<!--        <table schema="" tableName="wallet_water" domainObjectName="WalletWater"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+<!--        <table schema="" tableName="wong_collect_record" domainObjectName="WongCollectRecord"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"-->
+<!--        >-->
+<!--            <property name="selectAllOrderByClause" value="id desc"/>-->
+<!--            <property name="useActualColumnNames" value="false" />-->
+<!--        </table>-->
+
+
+
+
+
+
+
+
+
+        <!--
+            schema即为数据库名 tableName为对应的数据库表
+            domainObjectName是要生成的实体类
+             enable*ByExample 是否生成 example类   -->
+        <!-- <table schema="" tableName="user" domainObjectName="User"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false"
+            >
+            注意，该属性只针对MyBatis3Simple有用；
+                    如果选择的runtime是MyBatis3Simple，那么会生成一个SelectAll方法，如果指定了selectAllOrderByClause，那么会在该SQL中添加指定的这个order条件；
+
+            <property name="selectAllOrderByClause" value="id desc"/>
+            用于指定生成实体类时是否使用实际的列名作为实体类的属性名
+                    true:使用数据库中实际的字段名字作为生成的实体类的属性名
+                    false:默认值,转换为Camel Case风格作为生成的实体类的属性名
+            <property name="useActualColumnNames" value="true" />
+        </table>
+         -->
+
+
+
+
+
+       </context>
+   </generatorConfiguration>

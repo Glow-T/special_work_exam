@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group.special_work_exam.dao.WalletWaterMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.bean.WalletWater" >
+    <id column="wallet_water_id" property="walletWaterId" jdbcType="VARCHAR" />
+    <result column="wallet_option" property="walletOption" jdbcType="INTEGER" />
+    <result column="wallet_money" property="walletMoney" jdbcType="REAL" />
+    <result column="wallet_item" property="walletItem" jdbcType="VARCHAR" />
+    <result column="wallet_last_money" property="walletLastMoney" jdbcType="REAL" />
+    <result column="wallet_time" property="walletTime" jdbcType="TIMESTAMP" />
+    <result column="wallet_userid" property="walletUserid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    wallet_water_id, wallet_option, wallet_money, wallet_item, wallet_last_money, wallet_time, 
+    wallet_userid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wallet_water
+    where wallet_water_id = #{walletWaterId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wallet_water
+    where wallet_water_id = #{walletWaterId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.bean.WalletWater" >
+    insert into wallet_water (wallet_water_id, wallet_option, wallet_money, 
+      wallet_item, wallet_last_money, wallet_time, 
+      wallet_userid)
+    values (#{walletWaterId,jdbcType=VARCHAR}, #{walletOption,jdbcType=INTEGER}, #{walletMoney,jdbcType=REAL}, 
+      #{walletItem,jdbcType=VARCHAR}, #{walletLastMoney,jdbcType=REAL}, #{walletTime,jdbcType=TIMESTAMP}, 
+      #{walletUserid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.bean.WalletWater" >
+    insert into wallet_water
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="walletWaterId != null" >
+        wallet_water_id,
+      </if>
+      <if test="walletOption != null" >
+        wallet_option,
+      </if>
+      <if test="walletMoney != null" >
+        wallet_money,
+      </if>
+      <if test="walletItem != null" >
+        wallet_item,
+      </if>
+      <if test="walletLastMoney != null" >
+        wallet_last_money,
+      </if>
+      <if test="walletTime != null" >
+        wallet_time,
+      </if>
+      <if test="walletUserid != null" >
+        wallet_userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="walletWaterId != null" >
+        #{walletWaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="walletOption != null" >
+        #{walletOption,jdbcType=INTEGER},
+      </if>
+      <if test="walletMoney != null" >
+        #{walletMoney,jdbcType=REAL},
+      </if>
+      <if test="walletItem != null" >
+        #{walletItem,jdbcType=VARCHAR},
+      </if>
+      <if test="walletLastMoney != null" >
+        #{walletLastMoney,jdbcType=REAL},
+      </if>
+      <if test="walletTime != null" >
+        #{walletTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="walletUserid != null" >
+        #{walletUserid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.bean.WalletWater" >
+    update wallet_water
+    <set >
+      <if test="walletOption != null" >
+        wallet_option = #{walletOption,jdbcType=INTEGER},
+      </if>
+      <if test="walletMoney != null" >
+        wallet_money = #{walletMoney,jdbcType=REAL},
+      </if>
+      <if test="walletItem != null" >
+        wallet_item = #{walletItem,jdbcType=VARCHAR},
+      </if>
+      <if test="walletLastMoney != null" >
+        wallet_last_money = #{walletLastMoney,jdbcType=REAL},
+      </if>
+      <if test="walletTime != null" >
+        wallet_time = #{walletTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="walletUserid != null" >
+        wallet_userid = #{walletUserid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where wallet_water_id = #{walletWaterId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.bean.WalletWater" >
+    update wallet_water
+    set wallet_option = #{walletOption,jdbcType=INTEGER},
+      wallet_money = #{walletMoney,jdbcType=REAL},
+      wallet_item = #{walletItem,jdbcType=VARCHAR},
+      wallet_last_money = #{walletLastMoney,jdbcType=REAL},
+      wallet_time = #{walletTime,jdbcType=TIMESTAMP},
+      wallet_userid = #{walletUserid,jdbcType=INTEGER}
+    where wallet_water_id = #{walletWaterId,jdbcType=VARCHAR}
+  </update>
+</mapper>
