@@ -16,6 +16,31 @@
     from province_type
     where province_type_id = #{provinceTypeId,jdbcType=INTEGER}
   </select>
+<!--查询城市-->
+  <select id="selectcity" resultMap="BaseResultMap">
+    SELECT typeName FROM province_type WHERE pid= 0
+  </select>
+<!--查询所有考试-->
+  <select id="selectTest" resultMap="BaseResultMap">
+    SELECT typeName FROM province_type WHERE pid= 2
+  </select>
+<!--查询所有特种作业-->
+  <select id="selectTestSpecial" resultMap="BaseResultMap">
+    SELECT typeName FROM province_type WHERE pid= 5
+  </select>
+<!--  查询所有三类人员-->
+  <select id="selectThree" resultMap="BaseResultMap">
+    SELECT typeName FROM province_type WHERE pid= 9
+  </select>
+<!--查询所有动物技能实验-->
+  <select id="selectAnimal" resultMap="BaseResultMap">
+    SELECT typeName FROM province_type WHERE pid= 17
+  </select>
+
+  <select id="selectEight" resultMap="BaseResultMap">
+    SELECT typeName FROM province_type WHERE pid= 18
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from province_type
     where province_type_id = #{provinceTypeId,jdbcType=INTEGER}
