@@ -2,6 +2,8 @@ package com.group.special_work_exam.dao;
 
 import com.group.special_work_exam.bean.LunBo;
 
+import java.util.List;
+
 public interface LunBoMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface LunBoMapper {
     int updateByPrimaryKeySelective(LunBo record);
 
     int updateByPrimaryKey(LunBo record);
+
+    List<LunBo> selectAll();
 }

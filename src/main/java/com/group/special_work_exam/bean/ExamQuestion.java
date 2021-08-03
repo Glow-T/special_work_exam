@@ -6,9 +6,13 @@ import java.util.Date;
 public class ExamQuestion implements Serializable {
     private Integer id;
 
+    private String stem;
+
     private String typecode;
 
     private String answer;
+
+    private String analysis;
 
     private Date createdate;
 
@@ -32,6 +36,14 @@ public class ExamQuestion implements Serializable {
         this.id = id;
     }
 
+    public String getStem() {
+        return stem;
+    }
+
+    public void setStem(String stem) {
+        this.stem = stem == null ? null : stem.trim();
+    }
+
     public String getTypecode() {
         return typecode;
     }
@@ -46,6 +58,14 @@ public class ExamQuestion implements Serializable {
 
     public void setAnswer(String answer) {
         this.answer = answer == null ? null : answer.trim();
+    }
+
+    public String getAnalysis() {
+        return analysis;
+    }
+
+    public void setAnalysis(String analysis) {
+        this.analysis = analysis == null ? null : analysis.trim();
     }
 
     public Date getCreatedate() {

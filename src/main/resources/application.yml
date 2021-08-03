@@ -10,7 +10,7 @@ devtools:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://localhost:3306/exam?characterEncoding=UTF-8&serverTimezone=UTC
+      url: jdbc:mysql://localhost:3306/special_work_exam?characterEncoding=UTF-8&serverTimezone=UTC
       driver-class-name: com.mysql.jdbc.Driver
       username: root
       password: 123456
@@ -37,9 +37,9 @@ pagehelper:
   params: count=countSql
   support-methods-arguments: true
 swagger:
-  title: 考试管理系统
-  description: 考试管理系统API接口文档
-  base-package: com.ljy.exam.controller
+  title: 特种作业考试管理系统
+  description: 特种作业考试管理系统API接口文档
+  base-package: com.group.special_work_exam.controller
   version: 0.8
   license: No license for use
   contact:

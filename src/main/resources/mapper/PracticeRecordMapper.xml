@@ -12,6 +12,19 @@
   <sql id="Base_Column_List" >
     practice_record_id, questionid, practice_time, userid, practice_answer, practice_isright
   </sql>
+
+  <select id="findCountByUserId" resultType="Integer" parameterType="java.lang.Integer" >
+    select
+    count(1)
+    from practice_record
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <select id="findByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from practice_record
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

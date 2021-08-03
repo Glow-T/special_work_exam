@@ -82,8 +82,11 @@
 <!--               enableDeleteByExample="false" enableSelectByExample="false"-->
 <!--               selectByExampleQueryId="false"-->
 <!--        >-->
+
 <!--            <property name="selectAllOrderByClause" value="id desc"/>-->
 <!--            <property name="useActualColumnNames" value="false" />-->
+<!--            <columnOverride column="stem" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+<!--            <columnOverride column="analysis" javaType="java.lang.String" jdbcType="VARCHAR" />-->
 <!--        </table>-->
 
 

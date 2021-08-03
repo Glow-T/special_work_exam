@@ -2,6 +2,8 @@ package com.group.special_work_exam.dao;
 
 import com.group.special_work_exam.bean.Unit;
 
+import java.util.List;
+
 public interface UnitMapper {
     int deleteByPrimaryKey(Integer unitid);
 
@@ -14,4 +16,6 @@ public interface UnitMapper {
     int updateByPrimaryKeySelective(Unit record);
 
     int updateByPrimaryKey(Unit record);
+
+    List<Unit> findByProvinceTypeId(Integer provinceTypeId);
 }
