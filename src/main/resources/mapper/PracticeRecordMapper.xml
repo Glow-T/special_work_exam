@@ -12,6 +12,24 @@
   <sql id="Base_Column_List" >
     practice_record_id, questionid, practice_time, userid, practice_answer, practice_isright
   </sql>
+  <!--查询数量-->
+  <select id="findCount" resultType="int" parameterType="map" >
+    select count(1) from practice_record p
+    INNER JOIN examquestion e on e.id=p.questionid
+    INNER JOIN unit u on e.unitid = u.unitid
+    INNER JOIN province_type pt on pt.province_type_id = u.provincetypeid
+    where p.userid = #{userId,jdbcType=INTEGER} and pt.province_type_id = #{provinceTypeId,jdbcType=INTEGER}
+  </select>
+  <!--查询历史答题记录-->
+  <select id="findHistory" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from practice_record p
+    INNER JOIN examquestion e on e.id=p.questionid
+    INNER JOIN unit u on e.unitid = u.unitid
+    INNER JOIN province_type pt on pt.province_type_id = u.provincetypeid
+    where p.userid = #{userId,jdbcType=INTEGER} and pt.province_type_id = #{provinceTypeId,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

@@ -9,14 +9,15 @@ public class ResultBean {
         SUCCESS,FAIL,EXCEPTION
     }
 
+
     public ResultBean(CODE cx){
-        if(cx== CODE.SUCCESS){
+        if(cx==CODE.SUCCESS){
             this.code=100;
             this.msg="OK";
-        }else if(cx== CODE.FAIL){
+        }else if(cx==CODE.FAIL){
             this.code=200;
             this.msg="Fail";
-        }else if(cx== CODE.EXCEPTION){
+        }else if(cx==CODE.EXCEPTION){
             this.code=300;
             this.msg="Exception";
         }
