@@ -11,13 +11,13 @@ public class ResultBean {
 
     public ResultBean(CODE cx){
         if(cx== CODE.SUCCESS){
-            this.code=10000;
+            this.code=100;
             this.msg="OK";
         }else if(cx== CODE.FAIL){
-            this.code=20000;
+            this.code=200;
             this.msg="Fail";
         }else if(cx== CODE.EXCEPTION){
-            this.code=30000;
+            this.code=300;
             this.msg="Exception";
         }
     }
