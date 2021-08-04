@@ -20,8 +20,9 @@ public interface ExamQuestionMapper {
     int updateByPrimaryKeyWithBLOBs(ExamQuestionWithBLOBs record);
 
     int updateByPrimaryKey(ExamQuestion record);
-    List<ExamQuestion>  selectHonA();
 
-    int selectHonAcount();
+//    List<ExamQuestion>  selectHonA();
+
+//    int selectHonAcount();
 
 }

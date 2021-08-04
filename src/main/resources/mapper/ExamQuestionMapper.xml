@@ -32,21 +32,21 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
-<!--    查询安全员A的题目-->
-    <select id="selectHonA" resultMap="ResultMapWithBLOBs">
-    SELECT stem ,answer ,analysis,points FROM examquestion e
-    INNER JOIN unit u ON e.unitid=u.unitid
-    INNER JOIN province_type p ON p.province_type_id=u.provincetypeid
-    WHERE p.province_type_id=10 ORDER BY e.id
-  </select>
-    <select id="selectHonAcount" resultType="int">
-   SELECT COUNT(*) FROM(
-    SELECT stem ,answer ,analysis,points FROM examquestion e
-    INNER JOIN unit u ON e.unitid=u.unitid
-    INNER JOIN province_type p ON p.province_type_id=u.provincetypeid
-    WHERE p.province_type_id=10 ORDER BY e.id
-) t
-  </select>
+<!--&lt;!&ndash;    查询安全员A的题目&ndash;&gt;-->
+<!--    <select id="selectHonA" resultMap="ResultMapWithBLOBs">-->
+<!--    SELECT stem ,answer ,analysis,points FROM examquestion e-->
+<!--    INNER JOIN unit u ON e.unitid=u.unitid-->
+<!--    INNER JOIN province_type p ON p.province_type_id=u.provincetypeid-->
+<!--    WHERE p.province_type_id=10 ORDER BY e.id-->
+<!--  </select>-->
+<!--    <select id="selectHonAcount" resultType="int">-->
+<!--   SELECT COUNT(*) FROM(-->
+<!--    SELECT stem ,answer ,analysis,points FROM examquestion e-->
+<!--    INNER JOIN unit u ON e.unitid=u.unitid-->
+<!--    INNER JOIN province_type p ON p.province_type_id=u.provincetypeid-->
+<!--    WHERE p.province_type_id=10 ORDER BY e.id-->
+<!--) t-->
+<!--  </select>-->
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from examquestion
     where id = #{id,jdbcType=INTEGER}
