@@ -6,6 +6,7 @@ import java.util.Date;
 public class ExamQuestion implements Serializable {
     private Integer id;
 
+
     private String typecode;
 
     private String answer;
