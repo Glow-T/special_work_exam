@@ -4,6 +4,9 @@ import com.group.special_work_exam.bean.ExamQuestion;
 
 import java.util.List;
 
+import java.util.List;
+import java.util.Map;
+
 public interface ExamQuestionMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -17,7 +20,9 @@ public interface ExamQuestionMapper {
 
     int updateByPrimaryKey(ExamQuestion record);
 
+
     List<ExamQuestion> findByProvinceTypeId(Integer provinceTypeId);
 
     Integer findCount(Integer provinceTypeId);
+
 }

@@ -37,6 +37,7 @@ pagehelper:
   params: count=countSql
   support-methods-arguments: true
 swagger:
+
   title: 特种作业考试管理系统
   description: 特种作业考试管理系统API接口文档
   base-package: com.group.special_work_exam.controller

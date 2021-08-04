@@ -8,10 +8,7 @@ public class ResultBean {
     public enum CODE{
         SUCCESS,FAIL,EXCEPTION
     }
-    public ResultBean(){
-        this.code=100;
-        this.msg="OK";
-    }
+
 
     public ResultBean(CODE cx){
         if(cx==CODE.SUCCESS){
