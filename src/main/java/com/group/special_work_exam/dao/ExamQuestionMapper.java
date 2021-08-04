@@ -17,7 +17,7 @@ public interface ExamQuestionMapper {
 
     int updateByPrimaryKey(ExamQuestion record);
 
-    List<ExamQuestion> findByUnitId(Integer unitId);
+    List<ExamQuestion> findByProvinceTypeId(Integer provinceTypeId);
 
-    Integer findCountByUnitId(Integer unitId);
+    Integer findCount(Integer provinceTypeId);
 }

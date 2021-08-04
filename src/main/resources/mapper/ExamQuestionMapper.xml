@@ -18,17 +18,19 @@
     id, stem, typecode, answer, analysis, createdate, createUser, points, orders, unitid, 
     pid
   </sql>
-  <select id="findCountByUnitId" resultType="Integer" parameterType="java.lang.Integer" >
-    select
-    count(1)
-    from examquestion
-    where unitid = #{unitid,jdbcType=INTEGER}
+  <select id="findCount" resultType="Integer" parameterType="java.lang.Integer" >
+    select count(1) FROM examquestion q
+    INNER JOIN unit u on u.unitid=q.unitid
+    INNER JOIN province_type p on p.province_type_id=u.provincetypeid
+    where p.province_type_id = #{provinceTypeId,jdbcType=INTEGER}
   </select>
-  <select id="findByUnitId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="findByProvinceTypeId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
-    <include refid="Base_Column_List" />
-    from examquestion
-    where unitid = #{unitid,jdbcType=INTEGER}
+    q.*
+    FROM examquestion q
+    INNER JOIN unit u on u.unitid=q.unitid
+    INNER JOIN province_type p on p.province_type_id=u.provincetypeid
+    where p.province_type_id = #{provinceTypeId,jdbcType=INTEGER}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

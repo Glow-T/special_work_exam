@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/praticerecord")
@@ -26,15 +28,20 @@ public class PracticeRecordControllerImpl {
     PracticeRecordMapper mapper;
 
     @GetMapping("/finduserhistory")
-    @ApiOperation(value = "通过用户id+单元id查询历史练习题目")
+    @ApiOperation(value = "通过用户id+类型id查询历史练习题目")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId" , value ="用户Id"),
+            @ApiImplicitParam(name = "provinceTypeId" , value ="类型Id"),
     })
 
 
-    public Object findUserHistory(Integer userId){
+    public Object findUserHistory(Integer userId,Integer provinceTypeId){
 
-        List<PracticeRecord> list = mapper.findByUserId(userId);
+        Map map = new HashMap();
+        map.put("userId",userId);
+        map.put("provinceTypeId",provinceTypeId);
+
+        List<PracticeRecord> list = mapper.findHistory(userId,provinceTypeId);
 
         ResultBean resultBean = null;
 
@@ -51,15 +58,19 @@ public class PracticeRecordControllerImpl {
 
 
     @GetMapping("/finduserhistorycount")
-    @ApiOperation(value = "通过用户id+单元id查询历史练习题目数量")
+    @ApiOperation(value = "通过用户id+类型id查询历史练习题目数量")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId" , value ="用户Id"),
+            @ApiImplicitParam(name = "provinceTypeId" , value ="类型Id"),
     })
 
 
-    public Object findUserHistoryCount(Integer userId){
+    public Object findUserHistoryCount(Integer userId,Integer provinceTypeId){
+        Map map = new HashMap();
+        map.put("userId",userId);
+        map.put("provinceTypeId",provinceTypeId);
 
-        Integer count = mapper.findCountByUserId(userId);
+        Integer count = mapper.findCount(map);
 
         ResultBean resultBean = null;
 

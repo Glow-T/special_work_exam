@@ -4,6 +4,7 @@ import com.group.special_work_exam.bean.ExamQuestion;
 import com.group.special_work_exam.bean.PracticeRecord;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PracticeRecordMapper {
     int deleteByPrimaryKey(String practiceRecordId);
@@ -18,7 +19,7 @@ public interface PracticeRecordMapper {
 
     int updateByPrimaryKey(PracticeRecord record);
 
-    List<PracticeRecord> findByUserId(Integer userId);
+    List<PracticeRecord> findHistory(Integer userId,Integer provinceTypeId);
 
-    Integer findCountByUserId(Integer userId);
+    int findCount(Map map);
 }

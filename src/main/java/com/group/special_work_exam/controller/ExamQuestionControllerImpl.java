@@ -3,7 +3,9 @@ package com.group.special_work_exam.controller;
 
 import com.group.special_work_exam.bean.ExamQuestion;
 import com.group.special_work_exam.bean.ResultBean;
+import com.group.special_work_exam.bean.Unit;
 import com.group.special_work_exam.dao.ExamQuestionMapper;
+import com.group.special_work_exam.dao.UnitMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,27 +25,23 @@ public class ExamQuestionControllerImpl {
 
     @Autowired
     ExamQuestionMapper mapper;
+    @Autowired
+    UnitMapper  unitMapper;
+
 
     @GetMapping("/findbyunitid")
-    @ApiOperation(value = "通过类型单元id查询题目")
-    @ApiImplicitParam(name = "unitId" , value ="单元Id，可同时传入多个值")
+    @ApiOperation(value = "通过类型id查询题目")
+    @ApiImplicitParam(name = "provinceTypeId" , value ="类型id")
 
-    public Object findByUnitId(Integer ...unitId){
-        List<ExamQuestion> list = null;
-        for (Integer i: unitId) {
-            List<ExamQuestion> questionList =mapper.findByUnitId(i);
-            if(list==null){
-                list=questionList;
-            }else{
-                list.addAll(questionList);
-            }
-        }
 
+    public Object findByProvinceTypeId(Integer provinceTypeId){
+
+        List<ExamQuestion> questionList =mapper.findByProvinceTypeId(provinceTypeId);
         ResultBean resultBean = null;
 
-        if(list!=null){
+        if(questionList!=null){
             resultBean = new ResultBean();
-            resultBean.setObj(list);
+            resultBean.setObj(questionList);
         }else{
             resultBean = new ResultBean(ResultBean.CODE.FAIL);
         }
@@ -53,21 +52,20 @@ public class ExamQuestionControllerImpl {
 
 
     @GetMapping("/findcountbyunitid")
-    @ApiOperation(value = "通过类型单元id查询题目数量")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "unitId" , value ="单元Id，可同时传入多个值")
-    })
+    @ApiOperation(value = "通过类型类型id查询题目数量")
+    @ApiImplicitParam(name = "provinceTypeId" , value ="类型id")
 
-    public Object findCountByUnitId(Integer ...unitId){
 
-        Integer count = 0;
-        for (Integer i: unitId) {
-            count += mapper.findCountByUnitId(i);
-        }
+    public Object findCountByProvinceTypeId(Integer provinceTypeId){
+        Integer count = mapper.findCount(provinceTypeId);
         ResultBean resultBean = null;
-        resultBean = new ResultBean();
-        resultBean.setObj(count);
+        if(count!=null){
+            resultBean = new ResultBean();
+            resultBean.setObj(count);
+        }else{
+            resultBean=new ResultBean(ResultBean.CODE.FAIL);
+        }
         return resultBean;
-
     }
+
 }
