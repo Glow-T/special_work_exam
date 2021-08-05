@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group.special_work_exam.simrecord.dao.WongCollectRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.simrecord.bean.WongCollectRecord" >
+    <id column="collect_recode_id" property="collectRecodeId" jdbcType="VARCHAR" />
+    <result column="collect_userid" property="collectUserid" jdbcType="INTEGER" />
+    <result column="collect_time" property="collectTime" jdbcType="TIMESTAMP" />
+    <result column="collect_type" property="collectType" jdbcType="INTEGER" />
+    <result column="collect_questionid" property="collectQuestionid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    collect_recode_id, collect_userid, collect_time, collect_type, collect_questionid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wong_collect_record
+    where collect_recode_id = #{collectRecodeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wong_collect_record
+    where collect_recode_id = #{collectRecodeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.simrecord.bean.WongCollectRecord" >
+    insert into wong_collect_record (collect_recode_id, collect_userid, collect_time, 
+      collect_type, collect_questionid)
+    values (#{collectRecodeId,jdbcType=VARCHAR}, #{collectUserid,jdbcType=INTEGER}, #{collectTime,jdbcType=TIMESTAMP}, 
+      #{collectType,jdbcType=INTEGER}, #{collectQuestionid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.simrecord.bean.WongCollectRecord" >
+    insert into wong_collect_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectRecodeId != null" >
+        collect_recode_id,
+      </if>
+      <if test="collectUserid != null" >
+        collect_userid,
+      </if>
+      <if test="collectTime != null" >
+        collect_time,
+      </if>
+      <if test="collectType != null" >
+        collect_type,
+      </if>
+      <if test="collectQuestionid != null" >
+        collect_questionid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectRecodeId != null" >
+        #{collectRecodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectUserid != null" >
+        #{collectUserid,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null" >
+        #{collectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectType != null" >
+        #{collectType,jdbcType=INTEGER},
+      </if>
+      <if test="collectQuestionid != null" >
+        #{collectQuestionid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.simrecord.bean.WongCollectRecord" >
+    update wong_collect_record
+    <set >
+      <if test="collectUserid != null" >
+        collect_userid = #{collectUserid,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null" >
+        collect_time = #{collectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectType != null" >
+        collect_type = #{collectType,jdbcType=INTEGER},
+      </if>
+      <if test="collectQuestionid != null" >
+        collect_questionid = #{collectQuestionid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where collect_recode_id = #{collectRecodeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.simrecord.bean.WongCollectRecord" >
+    update wong_collect_record
+    set collect_userid = #{collectUserid,jdbcType=INTEGER},
+      collect_time = #{collectTime,jdbcType=TIMESTAMP},
+      collect_type = #{collectType,jdbcType=INTEGER},
+      collect_questionid = #{collectQuestionid,jdbcType=INTEGER}
+    where collect_recode_id = #{collectRecodeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,7 +1,7 @@
 server:
   port: 8888
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/**/*.xml
 devtools:
   restart:
     enabled: true
@@ -40,7 +40,7 @@ swagger:
 
   title: 特种作业考试管理系统
   description: 特种作业考试管理系统API接口文档
-  base-package: com.group.special_work_exam.controller
+  base-package: com.group.special_work_exam
   version: 0.8
   license: No license for use
   contact:

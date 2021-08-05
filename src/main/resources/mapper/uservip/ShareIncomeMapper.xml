@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group.special_work_exam.uservip.dao.ShareIncomeMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.uservip.bean.ShareIncome" >
+    <id column="share_income_id" property="shareIncomeId" jdbcType="VARCHAR" />
+    <result column="income_total" property="incomeTotal" jdbcType="REAL" />
+    <result column="income_my" property="incomeMy" jdbcType="REAL" />
+    <result column="income_time" property="incomeTime" jdbcType="TIMESTAMP" />
+    <result column="income_shareid" property="incomeShareid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    share_income_id, income_total, income_my, income_time, income_shareid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from share_income
+    where share_income_id = #{shareIncomeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from share_income
+    where share_income_id = #{shareIncomeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.uservip.bean.ShareIncome" >
+    insert into share_income (share_income_id, income_total, income_my, 
+      income_time, income_shareid)
+    values (#{shareIncomeId,jdbcType=VARCHAR}, #{incomeTotal,jdbcType=REAL}, #{incomeMy,jdbcType=REAL}, 
+      #{incomeTime,jdbcType=TIMESTAMP}, #{incomeShareid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.uservip.bean.ShareIncome" >
+    insert into share_income
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shareIncomeId != null" >
+        share_income_id,
+      </if>
+      <if test="incomeTotal != null" >
+        income_total,
+      </if>
+      <if test="incomeMy != null" >
+        income_my,
+      </if>
+      <if test="incomeTime != null" >
+        income_time,
+      </if>
+      <if test="incomeShareid != null" >
+        income_shareid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shareIncomeId != null" >
+        #{shareIncomeId,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeTotal != null" >
+        #{incomeTotal,jdbcType=REAL},
+      </if>
+      <if test="incomeMy != null" >
+        #{incomeMy,jdbcType=REAL},
+      </if>
+      <if test="incomeTime != null" >
+        #{incomeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incomeShareid != null" >
+        #{incomeShareid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.uservip.bean.ShareIncome" >
+    update share_income
+    <set >
+      <if test="incomeTotal != null" >
+        income_total = #{incomeTotal,jdbcType=REAL},
+      </if>
+      <if test="incomeMy != null" >
+        income_my = #{incomeMy,jdbcType=REAL},
+      </if>
+      <if test="incomeTime != null" >
+        income_time = #{incomeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incomeShareid != null" >
+        income_shareid = #{incomeShareid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where share_income_id = #{shareIncomeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.uservip.bean.ShareIncome" >
+    update share_income
+    set income_total = #{incomeTotal,jdbcType=REAL},
+      income_my = #{incomeMy,jdbcType=REAL},
+      income_time = #{incomeTime,jdbcType=TIMESTAMP},
+      income_shareid = #{incomeShareid,jdbcType=VARCHAR}
+    where share_income_id = #{shareIncomeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

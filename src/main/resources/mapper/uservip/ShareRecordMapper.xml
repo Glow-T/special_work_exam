@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group.special_work_exam.uservip.dao.ShareRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.uservip.bean.ShareRecord" >
+    <id column="share_record_id" property="shareRecordId" jdbcType="VARCHAR" />
+    <result column="share_host_userid" property="shareHostUserid" jdbcType="INTEGER" />
+    <result column="share_friend_userid" property="shareFriendUserid" jdbcType="INTEGER" />
+    <result column="share_time" property="shareTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    share_record_id, share_host_userid, share_friend_userid, share_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from share_record
+    where share_record_id = #{shareRecordId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from share_record
+    where share_record_id = #{shareRecordId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.uservip.bean.ShareRecord" >
+    insert into share_record (share_record_id, share_host_userid, share_friend_userid, 
+      share_time)
+    values (#{shareRecordId,jdbcType=VARCHAR}, #{shareHostUserid,jdbcType=INTEGER}, #{shareFriendUserid,jdbcType=INTEGER}, 
+      #{shareTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.uservip.bean.ShareRecord" >
+    insert into share_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shareRecordId != null" >
+        share_record_id,
+      </if>
+      <if test="shareHostUserid != null" >
+        share_host_userid,
+      </if>
+      <if test="shareFriendUserid != null" >
+        share_friend_userid,
+      </if>
+      <if test="shareTime != null" >
+        share_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shareRecordId != null" >
+        #{shareRecordId,jdbcType=VARCHAR},
+      </if>
+      <if test="shareHostUserid != null" >
+        #{shareHostUserid,jdbcType=INTEGER},
+      </if>
+      <if test="shareFriendUserid != null" >
+        #{shareFriendUserid,jdbcType=INTEGER},
+      </if>
+      <if test="shareTime != null" >
+        #{shareTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.uservip.bean.ShareRecord" >
+    update share_record
+    <set >
+      <if test="shareHostUserid != null" >
+        share_host_userid = #{shareHostUserid,jdbcType=INTEGER},
+      </if>
+      <if test="shareFriendUserid != null" >
+        share_friend_userid = #{shareFriendUserid,jdbcType=INTEGER},
+      </if>
+      <if test="shareTime != null" >
+        share_time = #{shareTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where share_record_id = #{shareRecordId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.uservip.bean.ShareRecord" >
+    update share_record
+    set share_host_userid = #{shareHostUserid,jdbcType=INTEGER},
+      share_friend_userid = #{shareFriendUserid,jdbcType=INTEGER},
+      share_time = #{shareTime,jdbcType=TIMESTAMP}
+    where share_record_id = #{shareRecordId,jdbcType=VARCHAR}
+  </update>
+</mapper>

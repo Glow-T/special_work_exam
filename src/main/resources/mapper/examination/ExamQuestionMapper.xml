@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.group.special_work_exam.examination.dao.ExamQuestionMapper" >
+  <!--题目-->
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.examination.bean.ExamQuestion" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stem" property="stem" jdbcType="VARCHAR" />
+    <result column="typecode" property="typecode" jdbcType="VARCHAR" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="analysis" property="analysis" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="createUser" property="createuser" jdbcType="BIGINT" />
+    <result column="points" property="points" jdbcType="REAL" />
+    <result column="orders" property="orders" jdbcType="INTEGER" />
+    <result column="unitid" property="unitid" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <association property="unit" javaType="com.group.special_work_exam.examination.bean.Unit" resultMap="Unit_BaseResultMap"/>
+    <association property="practiceRecord" javaType="com.group.special_work_exam.simrecord.bean.PracticeRecord" resultMap="Practice_BaseResultMap"/>
+    <association property="wongCollectRecord" javaType="com.group.special_work_exam.simrecord.bean.WongCollectRecord" resultMap="Wong_BaseResultMap"/>
+    <collection property="option" ofType="com.group.special_work_exam.examination.bean.QuestionOption" resultMap="Option_BaseResultMap"/>
+  </resultMap>
+  <!--题目单元-->
+  <resultMap id="Unit_BaseResultMap" type="com.group.special_work_exam.examination.bean.Unit" >
+    <id column="unit_unitid" property="unitid" jdbcType="INTEGER" />
+    <result column="unitName" property="unitname" jdbcType="VARCHAR" />
+    <result column="unitpid" property="unitpid" jdbcType="INTEGER" />
+    <result column="unitstate" property="unitstate" jdbcType="INTEGER" />
+    <result column="provincetypeid" property="provincetypeid" jdbcType="INTEGER" />
+  </resultMap>
+  <!--题目选项-->
+  <resultMap id="Option_BaseResultMap" type="com.group.special_work_exam.examination.bean.QuestionOption" >
+    <id column="option_id" property="id" jdbcType="INTEGER" />
+    <result column="optionPre" property="optionpre" jdbcType="VARCHAR" />
+    <result column="isanswer" property="isanswer" jdbcType="INTEGER" />
+    <result column="questionid" property="questionid" jdbcType="INTEGER" />
+    <result column="option_orders" property="orders" jdbcType="INTEGER" />
+    <result column="optiontxt" property="optiontxt" jdbcType="VARCHAR" />
+  </resultMap>
+  <!--练习记录-->
+  <resultMap id="Practice_BaseResultMap" type="com.group.special_work_exam.simrecord.bean.PracticeRecord" >
+    <id column="practice_record_id" property="practiceRecordId" jdbcType="VARCHAR" />
+    <result column="practice_questionid" property="questionid" jdbcType="INTEGER" />
+    <result column="practice_time" property="practiceTime" jdbcType="TIMESTAMP" />
+    <result column="practice_userid" property="userid" jdbcType="INTEGER" />
+    <result column="practice_answer" property="practiceAnswer" jdbcType="VARCHAR" />
+    <result column="practice_isright" property="practiceIsright" jdbcType="INTEGER" />
+  </resultMap>
+  <!--错题、收集记录-->
+  <resultMap id="Wong_BaseResultMap" type="com.group.special_work_exam.simrecord.bean.WongCollectRecord" >
+    <id column="collect_recode_id" property="collectRecodeId" jdbcType="VARCHAR" />
+    <result column="collect_userid" property="collectUserid" jdbcType="INTEGER" />
+    <result column="collect_time" property="collectTime" jdbcType="TIMESTAMP" />
+    <result column="collect_type" property="collectType" jdbcType="INTEGER" />
+    <result column="collect_questionid" property="collectQuestionid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, stem, typecode, answer, analysis, createdate, createUser, points, orders, unitid, 
+    pid
+  </sql>
+  <!--查询题目数量-->
+  <select id="findCount" resultType="Integer" parameterType="java.lang.Integer" >
+    select count(1) FROM examquestion q
+    INNER JOIN unit u on u.unitid=q.unitid
+    INNER JOIN province_type p on p.province_type_id=u.provincetypeid
+    where p.province_type_id = #{provinceTypeId,jdbcType=INTEGER}
+  </select>
+  <!--查询题目、题目单元、题目选项-->
+  <select id="findByProvinceTypeId" resultMap="BaseResultMap" parameterType="map" >
+    select
+    q.*,u.unitid unit_unitid,u.unitName,u.unitpid,u.unitstate,o.id option_id,o.optionPre,o.isanswer,
+    o.questionid,o.orders option_orders,o.optiontxt,r.practice_answer,r.practice_isright,w.collect_type
+    FROM examquestion q
+    INNER JOIN unit u on u.unitid=q.unitid
+    INNER JOIN province_type p on p.province_type_id=u.provincetypeid
+    LEFT JOIN questionoption o on o.questionid=q.id
+    LEFT JOIN practice_record r on r.questionid=q.id
+	LEFT JOIN wong_collect_record w on w.collect_questionid=q.id and w.collect_userid=r.userid
+    where p.province_type_id = #{provinceTypeId,jdbcType=INTEGER} and r.userid = #{userId,jdbcType=INTEGER}
+    order by q.orders,o.orders
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from examquestion
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from examquestion
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.examination.bean.ExamQuestion" >
+    insert into examquestion (id, stem, typecode, 
+      answer, analysis, createdate, 
+      createUser, points, orders, 
+      unitid, pid)
+    values (#{id,jdbcType=INTEGER}, #{stem,jdbcType=VARCHAR}, #{typecode,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR}, #{analysis,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{createuser,jdbcType=BIGINT}, #{points,jdbcType=REAL}, #{orders,jdbcType=INTEGER}, 
+      #{unitid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.examination.bean.ExamQuestion" >
+    insert into examquestion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stem != null" >
+        stem,
+      </if>
+      <if test="typecode != null" >
+        typecode,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="analysis != null" >
+        analysis,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="createuser != null" >
+        createUser,
+      </if>
+      <if test="points != null" >
+        points,
+      </if>
+      <if test="orders != null" >
+        orders,
+      </if>
+      <if test="unitid != null" >
+        unitid,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stem != null" >
+        #{stem,jdbcType=VARCHAR},
+      </if>
+      <if test="typecode != null" >
+        #{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="analysis != null" >
+        #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=BIGINT},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=REAL},
+      </if>
+      <if test="orders != null" >
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="unitid != null" >
+        #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.examination.bean.ExamQuestion" >
+    update examquestion
+    <set >
+      <if test="stem != null" >
+        stem = #{stem,jdbcType=VARCHAR},
+      </if>
+      <if test="typecode != null" >
+        typecode = #{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="analysis != null" >
+        analysis = #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        createUser = #{createuser,jdbcType=BIGINT},
+      </if>
+      <if test="points != null" >
+        points = #{points,jdbcType=REAL},
+      </if>
+      <if test="orders != null" >
+        orders = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="unitid != null" >
+        unitid = #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.examination.bean.ExamQuestion" >
+    update examquestion
+    set stem = #{stem,jdbcType=VARCHAR},
+      typecode = #{typecode,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      analysis = #{analysis,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      createUser = #{createuser,jdbcType=BIGINT},
+      points = #{points,jdbcType=REAL},
+      orders = #{orders,jdbcType=INTEGER},
+      unitid = #{unitid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

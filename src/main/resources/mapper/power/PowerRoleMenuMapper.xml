@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group.special_work_exam.power.dao.PowerRoleMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.power.bean.PowerRoleMenu" >
+    <id column="rm_id" property="rmId" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="menu_id" property="menuId" jdbcType="INTEGER" />
+    <result column="creator" property="creator" jdbcType="BIGINT" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rm_id, role_id, menu_id, creator, ctime, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from power_role_menu
+    where rm_id = #{rmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from power_role_menu
+    where rm_id = #{rmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.power.bean.PowerRoleMenu" >
+    insert into power_role_menu (rm_id, role_id, menu_id, 
+      creator, ctime, update_time
+      )
+    values (#{rmId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{menuId,jdbcType=INTEGER}, 
+      #{creator,jdbcType=BIGINT}, #{ctime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.power.bean.PowerRoleMenu" >
+    insert into power_role_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rmId != null" >
+        rm_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rmId != null" >
+        #{rmId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.power.bean.PowerRoleMenu" >
+    update power_role_menu
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="menuId != null" >
+        menu_id = #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rm_id = #{rmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.power.bean.PowerRoleMenu" >
+    update power_role_menu
+    set role_id = #{roleId,jdbcType=INTEGER},
+      menu_id = #{menuId,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where rm_id = #{rmId,jdbcType=INTEGER}
+  </update>
+</mapper>

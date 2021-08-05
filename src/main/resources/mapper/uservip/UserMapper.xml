@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group.special_work_exam.uservip.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.uservip.bean.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="nickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="headimg" property="headimg" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="departmentid" property="departmentid" jdbcType="INTEGER" />
+    <result column="classesid" property="classesid" jdbcType="INTEGER" />
+    <result column="enrollmentYear" property="enrollmentyear" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="realName" property="realname" jdbcType="VARCHAR" />
+    <result column="wxpay" property="wxpay" jdbcType="VARCHAR" />
+    <result column="isrealname" property="isrealname" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="studentid" property="studentid" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, nickName, headimg, phone, openid, departmentid, classesid, enrollmentYear, createTime, 
+    state, realName, wxpay, isrealname, sex, studentid, usertype, password, idcard, province, 
+    age
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.uservip.bean.User" >
+    insert into user (id, nickName, headimg, 
+      phone, openid, departmentid, 
+      classesid, enrollmentYear, createTime, 
+      state, realName, wxpay, 
+      isrealname, sex, studentid, 
+      usertype, password, idcard, 
+      province, age)
+    values (#{id,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{departmentid,jdbcType=INTEGER}, 
+      #{classesid,jdbcType=INTEGER}, #{enrollmentyear,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER}, #{realname,jdbcType=VARCHAR}, #{wxpay,jdbcType=VARCHAR}, 
+      #{isrealname,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{studentid,jdbcType=VARCHAR}, 
+      #{usertype,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.uservip.bean.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nickname != null" >
+        nickName,
+      </if>
+      <if test="headimg != null" >
+        headimg,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="departmentid != null" >
+        departmentid,
+      </if>
+      <if test="classesid != null" >
+        classesid,
+      </if>
+      <if test="enrollmentyear != null" >
+        enrollmentYear,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="realname != null" >
+        realName,
+      </if>
+      <if test="wxpay != null" >
+        wxpay,
+      </if>
+      <if test="isrealname != null" >
+        isrealname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="studentid != null" >
+        studentid,
+      </if>
+      <if test="usertype != null" >
+        usertype,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null" >
+        #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null" >
+        #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="classesid != null" >
+        #{classesid,jdbcType=INTEGER},
+      </if>
+      <if test="enrollmentyear != null" >
+        #{enrollmentyear,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="wxpay != null" >
+        #{wxpay,jdbcType=VARCHAR},
+      </if>
+      <if test="isrealname != null" >
+        #{isrealname,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="studentid != null" >
+        #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.uservip.bean.User" >
+    update user
+    <set >
+      <if test="nickname != null" >
+        nickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null" >
+        headimg = #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null" >
+        departmentid = #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="classesid != null" >
+        classesid = #{classesid,jdbcType=INTEGER},
+      </if>
+      <if test="enrollmentyear != null" >
+        enrollmentYear = #{enrollmentyear,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null" >
+        realName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="wxpay != null" >
+        wxpay = #{wxpay,jdbcType=VARCHAR},
+      </if>
+      <if test="isrealname != null" >
+        isrealname = #{isrealname,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="studentid != null" >
+        studentid = #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        usertype = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.uservip.bean.User" >
+    update user
+    set nickName = #{nickname,jdbcType=VARCHAR},
+      headimg = #{headimg,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      departmentid = #{departmentid,jdbcType=INTEGER},
+      classesid = #{classesid,jdbcType=INTEGER},
+      enrollmentYear = #{enrollmentyear,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      realName = #{realname,jdbcType=VARCHAR},
+      wxpay = #{wxpay,jdbcType=VARCHAR},
+      isrealname = #{isrealname,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      studentid = #{studentid,jdbcType=VARCHAR},
+      usertype = #{usertype,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

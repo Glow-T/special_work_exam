@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group.special_work_exam.wallet.dao.CashOutMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.wallet.bean.CashOut" >
+    <id column="cashoutid" property="cashoutid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="REAL" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="opmanagerid" property="opmanagerid" jdbcType="INTEGER" />
+    <result column="reson" property="reson" jdbcType="VARCHAR" />
+    <result column="optime" property="optime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="alipay" property="alipay" jdbcType="VARCHAR" />
+    <result column="alipayname" property="alipayname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cashoutid, userid, money, createTime, status, opmanagerid, reson, optime, remark, 
+    alipay, alipayname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cash_out
+    where cashoutid = #{cashoutid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cash_out
+    where cashoutid = #{cashoutid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.wallet.bean.CashOut" >
+    insert into cash_out (cashoutid, userid, money, 
+      createTime, status, opmanagerid, 
+      reson, optime, remark, 
+      alipay, alipayname)
+    values (#{cashoutid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{money,jdbcType=REAL}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{opmanagerid,jdbcType=INTEGER}, 
+      #{reson,jdbcType=VARCHAR}, #{optime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{alipay,jdbcType=VARCHAR}, #{alipayname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.wallet.bean.CashOut" >
+    insert into cash_out
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cashoutid != null" >
+        cashoutid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="opmanagerid != null" >
+        opmanagerid,
+      </if>
+      <if test="reson != null" >
+        reson,
+      </if>
+      <if test="optime != null" >
+        optime,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="alipay != null" >
+        alipay,
+      </if>
+      <if test="alipayname != null" >
+        alipayname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cashoutid != null" >
+        #{cashoutid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=REAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="opmanagerid != null" >
+        #{opmanagerid,jdbcType=INTEGER},
+      </if>
+      <if test="reson != null" >
+        #{reson,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="alipay != null" >
+        #{alipay,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayname != null" >
+        #{alipayname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.wallet.bean.CashOut" >
+    update cash_out
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="opmanagerid != null" >
+        opmanagerid = #{opmanagerid,jdbcType=INTEGER},
+      </if>
+      <if test="reson != null" >
+        reson = #{reson,jdbcType=VARCHAR},
+      </if>
+      <if test="optime != null" >
+        optime = #{optime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="alipay != null" >
+        alipay = #{alipay,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayname != null" >
+        alipayname = #{alipayname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cashoutid = #{cashoutid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.wallet.bean.CashOut" >
+    update cash_out
+    set userid = #{userid,jdbcType=INTEGER},
+      money = #{money,jdbcType=REAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      opmanagerid = #{opmanagerid,jdbcType=INTEGER},
+      reson = #{reson,jdbcType=VARCHAR},
+      optime = #{optime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      alipay = #{alipay,jdbcType=VARCHAR},
+      alipayname = #{alipayname,jdbcType=VARCHAR}
+    where cashoutid = #{cashoutid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group.special_work_exam.power.dao.PowerMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.power.bean.PowerMenu" >
+    <id column="menu_id" property="menuId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="orders" property="orders" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="permission" property="permission" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    menu_id, title, url, orders, pid, level, icon, ctime, creator, update_time, permission
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from power_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from power_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.group.special_work_exam.power.bean.PowerMenu" >
+    insert into power_menu (menu_id, title, url, 
+      orders, pid, level, 
+      icon, ctime, creator, 
+      update_time, permission)
+    values (#{menuId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{orders,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
+      #{icon,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, #{creator,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{permission,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.power.bean.PowerMenu" >
+    insert into power_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="orders != null" >
+        orders,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="permission != null" >
+        permission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null" >
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.power.bean.PowerMenu" >
+    update power_menu
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null" >
+        orders = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="permission != null" >
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.power.bean.PowerMenu" >
+    update power_menu
+    set title = #{title,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      orders = #{orders,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      permission = #{permission,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+</mapper>
