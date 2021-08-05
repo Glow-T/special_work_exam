@@ -16,6 +16,11 @@
     from province_type
     where province_type_id = #{provinceTypeId,jdbcType=INTEGER}
   </select>
+<!--  查询所有-->
+  <select id="selectall" resultMap="BaseResultMap">
+    SELECT * FROM province_type
+  </select>
+
 <!--查询城市-->
   <select id="selectcity" resultMap="BaseResultMap">
     SELECT typeName FROM province_type WHERE pid= 0

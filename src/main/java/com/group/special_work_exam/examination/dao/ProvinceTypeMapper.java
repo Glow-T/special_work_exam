@@ -27,4 +27,6 @@ public interface ProvinceTypeMapper {
 
     List<ProvinceType> selectAnimal();
     List<ProvinceType> selectEight();
+
+    List<ProvinceType> selectall();
 }
