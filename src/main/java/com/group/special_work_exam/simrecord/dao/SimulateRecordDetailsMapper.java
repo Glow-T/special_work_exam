@@ -2,6 +2,8 @@ package com.group.special_work_exam.simrecord.dao;
 
 import com.group.special_work_exam.simrecord.bean.SimulateRecordDetails;
 
+import java.util.List;
+
 public interface SimulateRecordDetailsMapper {
     int deleteByPrimaryKey(String simulateRecordDetailsId);
 
@@ -14,4 +16,6 @@ public interface SimulateRecordDetailsMapper {
     int updateByPrimaryKeySelective(SimulateRecordDetails record);
 
     int updateByPrimaryKey(SimulateRecordDetails record);
+
+    List<SimulateRecordDetails>selelctErr(Integer userId);
 }

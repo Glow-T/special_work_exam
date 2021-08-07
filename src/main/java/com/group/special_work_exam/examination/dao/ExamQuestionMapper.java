@@ -24,4 +24,6 @@ public interface ExamQuestionMapper {
 
     Integer findCount(Integer provinceTypeId);
 
+    List<ExamQuestion> finderrTip(Map map);
+
 }

@@ -88,6 +88,28 @@
     where p.province_type_id = #{provinceTypeId,jdbcType=INTEGER} and r.userid = #{userId,jdbcType=INTEGER}
     order by q.orders,o.orders
   </select>
+<!--  查找错误题目-->
+  <select id="finderrTip" resultMap="BaseResultMap"  parameterType="map">
+    select
+    q.*,u.unitid unit_unitid,u.unitName,u.unitpid,u.unitstate,o.id option_id,o.optionPre,o.isanswer,
+    o.questionid,o.orders option_orders,o.optiontxt,r.practice_answer,r.practice_isright,w.collect_type
+    FROM examquestion q
+    INNER JOIN unit u on u.unitid=q.unitid
+    INNER JOIN province_type p on p.province_type_id=u.provincetypeid
+    LEFT JOIN questionoption o on o.questionid=q.id
+    LEFT JOIN practice_record r on r.questionid=q.id
+	LEFT JOIN wong_collect_record w on w.collect_questionid=q.id and w.collect_userid=r.userid
+    where r.userid = #{userId,jdbcType=INTEGER} AND p.province_type_id = #{provinceTypeId,jdbcType=INTEGER} AND q.id
+    IN
+    (
+    select collect_questionid from wong_collect_record
+    where collect_userid =#{userId,jdbcType=INTEGER} and collect_questionid
+    in
+    (SELECT id from examquestion e INNER JOIN
+    unit u on u.unitid=e.unitid where u.provincetypeid =#{provinceTypeId,jdbcType=INTEGER} )
+    )
+
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

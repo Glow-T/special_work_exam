@@ -48,6 +48,26 @@ public class ExamQuestionControllerImpl {
         return resultBean;
     }
 
+    @GetMapping("finderr")
+    @ApiOperation(value = "查询错误试题")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "provinceTypeId" , value ="类型id"),
+            @ApiImplicitParam(name = "userId" , value ="用户id")
+    })
+    public Object finerrTip (Integer provinceTypeId,Integer userId){
+        Map map = new HashMap();
+        map.put("provinceTypeId",provinceTypeId);
+        map.put("userId",userId);
+        List<ExamQuestion> questionList =mapper.finderrTip(map);
+        ResultBean resultBean = new ResultBean();
+        if(questionList!=null){
+            resultBean = new ResultBean();
+            resultBean.setObj(questionList);
+        }else{
+            resultBean = new ResultBean(ResultBean.CODE.FAIL);
+        }
+        return resultBean;
+    }
 
     @GetMapping("/findcount")
     @ApiOperation(value = "通过类型类型id查询题目数量")
@@ -63,4 +83,6 @@ public class ExamQuestionControllerImpl {
         }
         return resultBean;
     }
+
+
 }

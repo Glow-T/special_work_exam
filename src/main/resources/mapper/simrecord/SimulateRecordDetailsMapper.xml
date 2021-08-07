@@ -20,6 +20,13 @@
     from simulate_record_details
     where simulate_record_details_id = #{simulateRecordDetailsId,jdbcType=VARCHAR}
   </select>
+<!--根据用户id查找错误题目-->
+  <select id="selelctErr" resultMap="BaseResultMap" parameterType="int">
+    SELECT d.* FROM simulate_record_details d
+    INNER JOIN 	simulate_record s ON s.simulate_record_id=srecordid
+    WHERE s.srecord_userid=#{userId,jdbcType=INTEGER} AND d.isright=0
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from simulate_record_details
     where simulate_record_details_id = #{simulateRecordDetailsId,jdbcType=VARCHAR}

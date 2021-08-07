@@ -1,6 +1,8 @@
 package com.group.special_work_exam.examination.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProvinceType implements Serializable {
     private Integer provinceTypeId;
@@ -10,6 +12,16 @@ public class ProvinceType implements Serializable {
     private Integer pid;
 
     private Integer typeStatus;
+
+    private List<ProvinceType> list=new ArrayList<>();
+
+    public List<ProvinceType> getList() {
+        return list;
+    }
+
+    public void setList(List<ProvinceType> list) {
+        this.list = list;
+    }
 
     private static final long serialVersionUID = 1L;
 
