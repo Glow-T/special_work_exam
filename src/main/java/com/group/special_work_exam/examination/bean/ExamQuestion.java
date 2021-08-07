@@ -70,7 +70,17 @@ public class ExamQuestion implements Serializable {
 
     private Unit unit;
 
+    private QuestionType questionType;
+
     private static final long serialVersionUID = 1L;
+
+    public QuestionType getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(QuestionType questionType) {
+        this.questionType = questionType;
+    }
 
     public Integer getId() {
         return id;

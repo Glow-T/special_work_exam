@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.group.special_work_exam.uservip.dao.user_vipMapper" >
-  <resultMap id="BaseResultMap" type="com.group.special_work_exam.uservip.bean.user_vip" >
+<mapper namespace="com.group.special_work_exam.uservip.dao.UserVipMapper" >
+  <resultMap id="BaseResultMap" type="com.group.special_work_exam.uservip.bean.UserVip" >
     <id column="uservip_id" property="uservipId" jdbcType="INTEGER" />
     <result column="userid" property="userid" jdbcType="INTEGER" />
     <result column="uservip_begintime" property="uservipBegintime" jdbcType="TIMESTAMP" />
@@ -15,6 +15,14 @@
     uservip_id, userid, uservip_begintime, uservip_endtime, uservip_state, uservip_createtime, 
     uservip_modifytime, uservip_typeid
   </sql>
+  <!--通过openid和类型id查询vip状态-->
+  <select id="findVip" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from user_vip v
+    inner join user u on v.userid=u.id
+    where u.openid = #{openid,jdbcType=BIGINT} and v.uservip_typeid = #{provincetypeid,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -25,20 +33,18 @@
     delete from user_vip
     where uservip_id = #{uservipId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.group.special_work_exam.uservip.bean.user_vip" >
-    insert into user_vip (uservip_id, userid, uservip_begintime, 
+  <insert id="insert" parameterType="com.group.special_work_exam.uservip.bean.UserVip" >
+    insert into user_vip (userid, uservip_begintime,
       uservip_endtime, uservip_state, uservip_createtime, 
       uservip_modifytime, uservip_typeid)
-    values (#{uservipId,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{uservipBegintime,jdbcType=TIMESTAMP}, 
+    values (#{userid,jdbcType=INTEGER}, #{uservipBegintime,jdbcType=TIMESTAMP},
       #{uservipEndtime,jdbcType=TIMESTAMP}, #{uservipState,jdbcType=INTEGER}, #{uservipCreatetime,jdbcType=TIMESTAMP}, 
       #{uservipModifytime,jdbcType=TIMESTAMP}, #{uservipTypeid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.group.special_work_exam.uservip.bean.user_vip" >
+  <insert id="insertSelective" parameterType="com.group.special_work_exam.uservip.bean.UserVip" >
     insert into user_vip
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uservipId != null" >
-        uservip_id,
-      </if>
+
       <if test="userid != null" >
         userid,
       </if>
@@ -62,9 +68,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uservipId != null" >
-        #{uservipId,jdbcType=INTEGER},
-      </if>
+
       <if test="userid != null" >
         #{userid,jdbcType=INTEGER},
       </if>
@@ -88,7 +92,25 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.uservip.bean.user_vip" >
+  <update id="updateByOpenId" parameterType="map" >
+    update user_vip
+    <set >
+      <if test="userVip.uservipBegintime != null" >
+        uservip_begintime = #{userVip.uservipBegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userVip.uservipEndtime != null" >
+        uservip_endtime = #{userVip.uservipEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userVip.uservipState != null" >
+        uservip_state = #{userVip.uservipState,jdbcType=INTEGER},
+      </if>
+      <if test="userVip.uservipModifytime != null" >
+        uservip_modifytime = #{userVip.uservipModifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where userid = (select id from user where openid = #{openid,jdbcType=VARCHAR}) and uservip_typeid =#{userVip.uservipTypeid}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.special_work_exam.uservip.bean.UserVip" >
     update user_vip
     <set >
       <if test="userid != null" >
@@ -115,7 +137,7 @@
     </set>
     where uservip_id = #{uservipId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.uservip.bean.user_vip" >
+  <update id="updateByPrimaryKey" parameterType="com.group.special_work_exam.uservip.bean.UserVip" >
     update user_vip
     set userid = #{userid,jdbcType=INTEGER},
       uservip_begintime = #{uservipBegintime,jdbcType=TIMESTAMP},
