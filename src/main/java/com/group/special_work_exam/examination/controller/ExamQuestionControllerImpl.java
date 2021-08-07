@@ -28,7 +28,7 @@ public class ExamQuestionControllerImpl {
     UnitMapper  unitMapper;
 
     @GetMapping("/findquestion")
-    @ApiOperation(value = "通过类型id,用户id查询题目，包含信息：题目、选项、练习记录、错题和收藏")
+    @ApiOperation(value = "通过类型id,用户id查询题目，包含信息：题目、类型、选项、练习记录、错题和收藏")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "provinceTypeId" , value ="类型id"),
             @ApiImplicitParam(name = "userId" , value ="用户id")

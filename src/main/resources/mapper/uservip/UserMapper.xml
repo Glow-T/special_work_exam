@@ -22,12 +22,31 @@
     <result column="idcard" property="idcard" jdbcType="VARCHAR" />
     <result column="province" property="province" jdbcType="VARCHAR" />
     <result column="age" property="age" jdbcType="INTEGER" />
+    <collection property="userVip" ofType="com.group.special_work_exam.uservip.bean.UserVip" resultMap="UserVip_BaseResultMap"/>
+  </resultMap>
+
+  <resultMap id="UserVip_BaseResultMap" type="com.group.special_work_exam.uservip.bean.UserVip" >
+    <id column="uservip_id" property="uservipId" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="uservip_begintime" property="uservipBegintime" jdbcType="TIMESTAMP" />
+    <result column="uservip_endtime" property="uservipEndtime" jdbcType="TIMESTAMP" />
+    <result column="uservip_state" property="uservipState" jdbcType="INTEGER" />
+    <result column="uservip_createtime" property="uservipCreatetime" jdbcType="TIMESTAMP" />
+    <result column="uservip_modifytime" property="uservipModifytime" jdbcType="TIMESTAMP" />
+    <result column="uservip_typeid" property="uservipTypeid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, nickName, headimg, phone, openid, departmentid, classesid, enrollmentYear, createTime, 
     state, realName, wxpay, isrealname, sex, studentid, usertype, password, idcard, province, 
     age
   </sql>
+  <select id="findUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    u.*,v.*
+    from user u
+    LEFT JOIN user_vip v on v.userid=u.id
+    where u.openid = #{openid,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

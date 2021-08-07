@@ -44,7 +44,17 @@ public class User implements Serializable {
 
     private Integer age;
 
+    private UserVip userVip;
+
     private static final long serialVersionUID = 1L;
+
+    public UserVip getUserVip() {
+        return userVip;
+    }
+
+    public void setUserVip(UserVip userVip) {
+        this.userVip = userVip;
+    }
 
     public Long getId() {
         return id;

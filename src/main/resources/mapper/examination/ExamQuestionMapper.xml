@@ -15,6 +15,7 @@
     <result column="orders" property="orders" jdbcType="INTEGER" />
     <result column="unitid" property="unitid" jdbcType="INTEGER" />
     <result column="pid" property="pid" jdbcType="INTEGER" />
+    <association property="questionType" javaType="com.group.special_work_exam.examination.bean.QuestionType" resultMap="Type_BaseResultMap"/>
     <association property="unit" javaType="com.group.special_work_exam.examination.bean.Unit" resultMap="Unit_BaseResultMap"/>
     <association property="practiceRecord" javaType="com.group.special_work_exam.simrecord.bean.PracticeRecord" resultMap="Practice_BaseResultMap"/>
     <association property="wongCollectRecord" javaType="com.group.special_work_exam.simrecord.bean.WongCollectRecord" resultMap="Wong_BaseResultMap"/>
@@ -54,6 +55,12 @@
     <result column="collect_type" property="collectType" jdbcType="INTEGER" />
     <result column="collect_questionid" property="collectQuestionid" jdbcType="INTEGER" />
   </resultMap>
+  <!--题目类型-->
+  <resultMap id="Type_BaseResultMap" type="com.group.special_work_exam.examination.bean.QuestionType" >
+    <id column="type_id" property="id" jdbcType="INTEGER" />
+    <result column="typeName" property="typename" jdbcType="VARCHAR" />
+    <result column="type_typecode" property="typecode" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, stem, typecode, answer, analysis, createdate, createUser, points, orders, unitid, 
     pid
@@ -69,13 +76,15 @@
   <select id="findByProvinceTypeId" resultMap="BaseResultMap" parameterType="map" >
     select
     q.*,u.unitid unit_unitid,u.unitName,u.unitpid,u.unitstate,o.id option_id,o.optionPre,o.isanswer,
-    o.questionid,o.orders option_orders,o.optiontxt,r.practice_answer,r.practice_isright,w.collect_type
+    o.questionid,o.orders option_orders,o.optiontxt,r.practice_answer,r.practice_isright,w.collect_type,
+    t.typeName
     FROM examquestion q
     INNER JOIN unit u on u.unitid=q.unitid
     INNER JOIN province_type p on p.province_type_id=u.provincetypeid
     LEFT JOIN questionoption o on o.questionid=q.id
     LEFT JOIN practice_record r on r.questionid=q.id
 	LEFT JOIN wong_collect_record w on w.collect_questionid=q.id and w.collect_userid=r.userid
+	LEFT JOIN questiontype t on t.typecode=q.typecode
     where p.province_type_id = #{provinceTypeId,jdbcType=INTEGER} and r.userid = #{userId,jdbcType=INTEGER}
     order by q.orders,o.orders
   </select>

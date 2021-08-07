@@ -3,7 +3,7 @@ package com.group.special_work_exam.uservip.bean;
 import java.io.Serializable;
 import java.util.Date;
 
-public class user_vip implements Serializable {
+public class UserVip implements Serializable {
     private Integer uservipId;
 
     private Integer userid;
