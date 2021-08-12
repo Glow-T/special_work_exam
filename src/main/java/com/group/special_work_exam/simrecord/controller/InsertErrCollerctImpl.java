@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -28,7 +27,7 @@ public class InsertErrCollerctImpl {
     @ApiOperation(value = "插入错误题目")
     @GetMapping("insertErrCollerct")
     @ApiImplicitParams(
-            {
+                    {
                     @ApiImplicitParam(name = "userId" ,value = "用户id", paramType = "Integer"),
                     @ApiImplicitParam(name = "type" ,value = "类型id",paramType = "Integer"),
                     @ApiImplicitParam(name = "questionId" ,value = "题目id",paramType = "Integer")

@@ -2,6 +2,8 @@ package com.group.special_work_exam.uservip.dao;
 
 import com.group.special_work_exam.uservip.bean.User;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,5 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    List<User>selectAll();
 }
